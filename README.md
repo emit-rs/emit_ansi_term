@@ -1,2 +1,3 @@
-# emit_ansi_terminal
+# emit_ansi_term
+
 Colored (ANSI) terminal collector for the emit structured logger
