@@ -1,12 +1,12 @@
 #[macro_use]
 extern crate emit;
-extern crate log;
 extern crate ansi_term;
 extern crate chrono;
 
 use std::io;
 use std::error::Error;
 use ansi_term::{Style,Colour,ANSIString};
+use emit::LogLevel;
 use emit::events::Event;
 use emit::collectors::AcceptEvents;
 use emit::templates::repl::MessageTemplateRepl;
@@ -39,7 +39,7 @@ static LEVEL_NAMES: [&'static str; 6] = [
     "TRA"
 ];
 
-fn to_colored_level(level: log::LogLevel) -> ANSIString<'static> {
+fn to_colored_level(level: LogLevel) -> ANSIString<'static> {
     let n = LEVEL_NAMES[level as usize];
     let c = LEVEL_COLORS[level as usize];
     Style::new().fg(c.0).bold().on(c.1).paint(n)
@@ -74,7 +74,7 @@ mod tests {
             .write_to(AnsiTerminalCollector::new())
             .init();
 
-        eminfo!("Hello, {}!", name: "Alice");
-        emerror!("Goodbye, {}!", number: 42);
+        info!("Hello, {}!", name: "Alice");
+        error!("Goodbye, {}!", number: 42);
     }
 }
